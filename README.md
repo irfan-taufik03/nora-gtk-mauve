@@ -1,4 +1,6 @@
-![Preview](images/preview.png)
+<p align="center">
+  <img src="images/preview.png" alt="Nora GTK Mauve Preview" width="550" />
+</p>
 
 # Nora GTK Mauve
 
