@@ -1,3 +1,5 @@
+![Preview](images/preview.png)
+
 # Nora GTK Mauve
 
 Nora GTK Mauve is a GTK theme featuring a Mauve/Nord-inspired color palette for Linux desktop environments (GNOME, XFCE, Cinnamon, etc.).
@@ -76,6 +78,20 @@ Open **Settings -> Appearance** and select `Nora-gtk-mauve`, then open **Window 
 
 ### Cinnamon
 Open **Themes** settings and select `Nora-gtk-mauve` for Controls and Window borders.
+
+---
+
+## 📸 Screenshots
+
+![Preview 1](images/preview-1.png)
+
+![Preview 2](images/preview-2.png)
+
+![Preview 3](images/preview-3.png)
+
+![Preview 4](images/preview-4.png)
+
+![Preview 5](images/preview-5.png)
 
 ---
 
