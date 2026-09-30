@@ -13,6 +13,7 @@ Nora GTK Mauve is a GTK theme featuring a Mauve/Nord-inspired color palette for 
 - **Metacity** window borders
 - **XFWM4** window manager theme (XFCE)
 - **Cinnamon** desktop support
+- **KDE Plasma** extras: color scheme, Kvantum theme, Aurorae window decoration (`plasma/`, install with `./install.sh -p`)
 - Automated installation script (`install.sh`)
 
 ---
@@ -80,6 +81,20 @@ Open **Settings -> Appearance** and select `Nora-gtk-mauve`, then open **Window 
 
 ### Cinnamon
 Open **Themes** settings and select `Nora-gtk-mauve` for Controls and Window borders.
+
+### KDE Plasma
+Install the Plasma extras together with the GTK theme:
+```bash
+./install.sh -p
+```
+Then apply them in **System Settings**:
+- **Appearance → Colors** → `Nora Mauve`
+- **Appearance → Application Style** → select `kvantum`, then open **Kvantum Manager** → `NoraMauve` → *Use this theme*
+- **Appearance → Window Decorations** → `NoraMauve`
+
+> Tip: for GTK apps running under Plasma (Firefox, GIMP, …), also set
+> **Application Style → Configure GNOME/GTK Application Style** → `Nora-gtk-mauve`
+> so they match the rest of the desktop.
 
 ---
 
