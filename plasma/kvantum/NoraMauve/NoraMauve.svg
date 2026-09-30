@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460">
+<rect id="ibutton-normal" x="10" y="10" width="130" height="44" rx="6" fill="#3b4252" stroke="#3a4253" stroke-width="1"/>
+<rect id="ibutton-focused" x="160" y="10" width="130" height="44" rx="6" fill="#4a5367" stroke="#5b6579" stroke-width="1"/>
+<rect id="ibutton-pressed" x="310" y="10" width="130" height="44" rx="6" fill="#2e3440" stroke="#3a4253" stroke-width="1"/>
+<rect id="ibutton-toggled" x="460" y="10" width="130" height="44" rx="6" fill="#c6a0f6" stroke="#c6a0f6" stroke-width="1"/>
+<rect id="ibutton-disabled" x="610" y="10" width="130" height="44" rx="6" fill="#363c4b" stroke="#3a4253" stroke-width="1"/>
+<rect id="itab-normal" x="10" y="80" width="130" height="40" rx="6" fill="#363c4b"/>
+<rect id="itab-focused" x="160" y="80" width="130" height="40" rx="6" fill="#4a5367"/>
+<rect id="itab-pressed" x="310" y="80" width="130" height="40" rx="6" fill="#c6a0f6"/>
+<rect id="itab-disabled" x="460" y="80" width="130" height="40" rx="6" fill="#363c4b"/>
+<rect id="ilineedit-normal" x="10" y="150" width="130" height="40" rx="6" fill="#2e3440" stroke="#3a4253" stroke-width="1"/>
+<rect id="ilineedit-focused" x="160" y="150" width="130" height="40" rx="6" fill="#2e3440" stroke="#c6a0f6" stroke-width="1"/>
+<rect id="ilineedit-disabled" x="310" y="150" width="130" height="40" rx="6" fill="#363c4b" stroke="#3a4253" stroke-width="1"/>
+<rect id="imenuitem-normal" x="10" y="220" width="130" height="40" rx="6" fill="#000000" fill-opacity="0"/>
+<rect id="imenuitem-focused" x="160" y="220" width="130" height="40" rx="6" fill="#c6a0f6"/>
+<rect id="itooltip-normal" x="310" y="220" width="130" height="40" rx="6" fill="#2e3440" stroke="#3a4253" stroke-width="1"/>
+<rect id="ipanel-normal" x="460" y="220" width="130" height="40" rx="6" fill="#3b4252" stroke="#3a4253" stroke-width="1"/>
+</svg>

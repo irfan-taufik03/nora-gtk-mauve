@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+<g id="active-center">
+<circle cx="14" cy="14" r="9" fill="#454d60"/>
+<path d="M10,14 L18,14" stroke="#d8dee9" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g id="hover-center">
+<circle cx="14" cy="14" r="9" fill="#c6a0f6"/>
+<path d="M10,14 L18,14" stroke="#24273a" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g id="pressed-center">
+<circle cx="14" cy="14" r="9" fill="#b48ef0"/>
+<path d="M10,14 L18,14" stroke="#24273a" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g id="inactive-center">
+<circle cx="14" cy="14" r="9" fill="#363c4b"/>
+<path d="M10,14 L18,14" stroke="#8a909e" stroke-width="2" stroke-linecap="round"/>
+</g>
+</svg>

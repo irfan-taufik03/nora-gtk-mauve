@@ -34,19 +34,27 @@ usage() {
     echo ""
     echo "Options:"
     echo "  -s, --system        Install theme system-wide to /usr/share/themes (requires root/sudo)"
-    echo "  -d, --dest DIR      Specify custom destination directory"
+    echo "  -d, --dest DIR      Specify custom destination directory (GTK theme only)"
+    echo "  -p, --plasma        Also install KDE Plasma extras (color scheme, Kvantum theme, Aurorae decoration)"
     echo "  -r, --remove        Uninstall / remove the theme"
     echo "  -h, --help          Display this help message"
     echo ""
     echo "Examples:"
     echo "  $0                  # Installs for current user to ~/.themes and ~/.local/share/themes"
+    echo "  $0 -p               # Installs GTK theme + KDE Plasma extras for current user"
     echo "  sudo $0 -s          # Installs system-wide to /usr/share/themes"
+    echo "  sudo $0 -s -p       # Installs system-wide incl. Plasma extras"
     echo "  $0 -r               # Uninstalls theme from user directory"
+    echo "  $0 -r -p            # Uninstalls theme + Plasma extras"
 }
 
 DEST_DIR=""
 SYSTEM_INSTALL=false
 UNINSTALL=false
+PLASMA=false
+
+PLASMA_SRC="${SRC_DIR}/plasma"
+PLASMA_NAME="NoraMauve"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -57,6 +65,10 @@ while [[ $# -gt 0 ]]; do
         -d|--dest)
             DEST_DIR="$2"
             shift 2
+            ;;
+        -p|--plasma)
+            PLASMA=true
+            shift
             ;;
         -r|--remove|--uninstall)
             UNINSTALL=true
@@ -80,6 +92,49 @@ if [[ ! -d "${THEME_SRC}" ]]; then
     exit 1
 fi
 
+# KDE Plasma extras: color scheme, Kvantum theme, Aurorae window decoration
+install_plasma() {
+    if [[ ! -d "${PLASMA_SRC}" ]]; then
+        print_warn "Plasma extras not found in '${PLASMA_SRC}', skipping."
+        return
+    fi
+    print_info "Installing KDE Plasma extras..."
+    if [[ "${SYSTEM_INSTALL}" == true ]] || [[ "$EUID" -eq 0 ]]; then
+        local cs_dest="/usr/share/color-schemes"
+        local kv_dest="/usr/share/Kvantum"
+        local au_dest="/usr/share/aurorae/themes"
+    else
+        local cs_dest="${HOME}/.local/share/color-schemes"
+        local kv_dest="${HOME}/.config/Kvantum"
+        local au_dest="${HOME}/.local/share/aurorae/themes"
+    fi
+    mkdir -p "${cs_dest}" "${kv_dest}" "${au_dest}"
+    cp -f "${PLASMA_SRC}/color-schemes/${PLASMA_NAME}.colors" "${cs_dest}/"
+    print_success "Color scheme -> ${cs_dest}/${PLASMA_NAME}.colors"
+    rm -rf "${kv_dest}/${PLASMA_NAME}"
+    cp -r "${PLASMA_SRC}/kvantum/${PLASMA_NAME}" "${kv_dest}/"
+    print_success "Kvantum theme -> ${kv_dest}/${PLASMA_NAME}/"
+    rm -rf "${au_dest}/${PLASMA_NAME}"
+    cp -r "${PLASMA_SRC}/aurorae/${PLASMA_NAME}" "${au_dest}/"
+    print_success "Aurorae decoration -> ${au_dest}/${PLASMA_NAME}/"
+}
+
+uninstall_plasma() {
+    print_info "Uninstalling KDE Plasma extras..."
+    if [[ "${SYSTEM_INSTALL}" == true ]] || [[ "$EUID" -eq 0 ]]; then
+        local cs_dest="/usr/share/color-schemes"
+        local kv_dest="/usr/share/Kvantum"
+        local au_dest="/usr/share/aurorae/themes"
+    else
+        local cs_dest="${HOME}/.local/share/color-schemes"
+        local kv_dest="${HOME}/.config/Kvantum"
+        local au_dest="${HOME}/.local/share/aurorae/themes"
+    fi
+    rm -f "${cs_dest}/${PLASMA_NAME}.colors" && print_success "Removed ${cs_dest}/${PLASMA_NAME}.colors"
+    rm -rf "${kv_dest}/${PLASMA_NAME}" && print_success "Removed ${kv_dest}/${PLASMA_NAME}/"
+    rm -rf "${au_dest}/${PLASMA_NAME}" && print_success "Removed ${au_dest}/${PLASMA_NAME}/"
+}
+
 # Determine default destination directory
 if [[ -z "${DEST_DIR}" ]]; then
     if [[ "${SYSTEM_INSTALL}" == true ]] || [[ "$EUID" -eq 0 ]]; then
@@ -102,6 +157,9 @@ if [[ "${UNINSTALL}" == true ]]; then
             print_warn "Not found in ${dir}"
         fi
     done
+    if [[ "${PLASMA}" == true ]]; then
+        uninstall_plasma
+    fi
     print_success "Uninstall completed."
     exit 0
 fi
@@ -126,3 +184,13 @@ print_success "Theme installation finished successfully!"
 echo -e "To apply the theme via command line (GNOME/GTK):"
 echo -e "  ${YELLOW}gsettings set org.gnome.desktop.interface gtk-theme \"${THEME_NAME}\"${NC}"
 echo -e "  ${YELLOW}gsettings set org.gnome.desktop.wm.preferences theme \"${THEME_NAME}\"${NC}"
+
+if [[ "${PLASMA}" == true ]]; then
+    install_plasma
+    echo ""
+    print_success "Plasma extras installed!"
+    echo -e "Apply them in ${YELLOW}System Settings${NC}:"
+    echo -e "  Appearance > Colors            -> ${YELLOW}Nora Mauve${NC}"
+    echo -e "  Appearance > Application Style -> ${YELLOW}Kvantum${NC}, then Kvantum Manager -> ${YELLOW}NoraMauve${NC}"
+    echo -e "  Appearance > Window Decorations -> ${YELLOW}NoraMauve${NC} (Aurorae)"
+fi
